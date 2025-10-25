@@ -7,6 +7,8 @@ class OrderItemCreate(BaseModel):
     product_name: str
     quantity: int
     price: float
+    size: Optional[str] = None
+    color: Optional[str] = None
 
 class OrderItemResponse(OrderItemCreate):
     id: int

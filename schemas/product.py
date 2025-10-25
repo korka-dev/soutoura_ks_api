@@ -9,6 +9,8 @@ class ProductBase(BaseModel):
     category: Optional[str] = None
     stock: int = 0
     images: Optional[List[str]] = []
+    sizes: Optional[List[str]] = []
+    colors: Optional[List[str]] = []
 
 class ProductCreate(ProductBase):
     pass
@@ -20,6 +22,8 @@ class ProductUpdate(BaseModel):
     category: Optional[str] = None
     stock: Optional[int] = None
     images: Optional[List[str]] = None
+    sizes: Optional[List[str]] = None
+    colors: Optional[List[str]] = None
 
 class ProductResponse(ProductBase):
     id: int

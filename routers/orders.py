@@ -45,14 +45,15 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_order)
     
-    # Create order items
     for item in order_data.items:
         db_item = OrderItem(
             order_id=db_order.id,
             product_id=item.product_id,
             product_name=item.product_name,
             quantity=item.quantity,
-            price=item.price
+            price=item.price,
+            size=item.size,
+            color=item.color
         )
         db.add(db_item)
     
@@ -63,9 +64,18 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
         items_html = ""
         for item in order_data.items:
             total_item = item.price * item.quantity
+            size_color_info = ""
+            if item.size or item.color:
+                details = []
+                if item.size:
+                    details.append(f"Taille: {item.size}")
+                if item.color:
+                    details.append(f"Couleur: {item.color}")
+                size_color_info = f"<br><small style='color: #666;'>({', '.join(details)})</small>"
+            
             items_html += f"""
                 <tr>
-                    <td><strong>{item.product_name}</strong></td>
+                    <td><strong>{item.product_name}</strong>{size_color_info}</td>
                     <td style="text-align: center;">{item.quantity}</td>
                     <td style="text-align: right;">{item.price:,.0f} FCFA</td>
                     <td style="text-align: right;"><strong>{total_item:,.0f} FCFA</strong></td>
@@ -115,19 +125,19 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
               <div class="section">
                 <div class="section-title">📋 Informations Client</div>
                 <div class="info-row">
-                  <span class="info-label">Nom complet: </span>
+                  <span class="info-label">Nom complet:</span>
                   <span class="info-value">{order_data.customer_name}</span>
                 </div>
                 <div class="info-row">
-                  <span class="info-label">Email: </span>
+                  <span class="info-label">Email:</span>
                   <span class="info-value">{order_data.customer_email}</span>
                 </div>
                 <div class="info-row">
-                  <span class="info-label">Téléphone: </span>
+                  <span class="info-label">Téléphone:</span>
                   <span class="info-value">{order_data.customer_phone}</span>
                 </div>
                 <div class="info-row">
-                  <span class="info-label">Adresse de livraison: </span>
+                  <span class="info-label">Adresse de livraison:</span>
                   <span class="info-value">{order_data.customer_address}</span>
                 </div>
                 <div class="info-row">
@@ -150,7 +160,7 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
                   <tbody>
                     {items_html}
                     <tr class="total-row">
-                      <td colspan="3" style="text-align: right;">TOTAL À PAYER: </td>
+                      <td colspan="3" style="text-align: right;">TOTAL À PAYER:</td>
                       <td style="text-align: right;">{order_data.total_amount:,.0f} FCFA</td>
                     </tr>
                   </tbody>

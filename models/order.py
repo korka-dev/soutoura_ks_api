@@ -27,5 +27,7 @@ class OrderItem(Base):
     product_name = Column(String(255))
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
+    size = Column(String(50))
+    color = Column(String(100))
     
     order = relationship("Order", back_populates="items")

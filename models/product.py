@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, Text, JSON, DateTime
+from sqlalchemy import Column, Integer, String, Float, Text, TIMESTAMP, JSON, DateTime
 from sqlalchemy.sql import func
 from database import Base
 
@@ -12,5 +12,8 @@ class Product(Base):
     category = Column(String(100))
     stock = Column(Integer, default=0)
     images = Column(JSON)
+    sizes = Column(JSON, default=[])
+    colors = Column(JSON, default=[])
+    created_at = Column(TIMESTAMP, server_default=func.now())
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
