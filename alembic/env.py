@@ -16,6 +16,7 @@ load_dotenv()
 from database import Base
 from models.product import Product
 from models.order import Order, OrderItem
+from models.survey import CustomerSurvey 
 
 # this is the Alembic Config object
 config = context.config

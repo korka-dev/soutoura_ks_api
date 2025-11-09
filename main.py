@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import products, orders, auth, upload
+from routers import products, orders, auth, upload, survey
 import os
 from dotenv import load_dotenv
 
@@ -22,6 +22,8 @@ app.include_router(products.router, prefix="/api/products", tags=["products"])
 app.include_router(orders.router, prefix="/api/orders", tags=["orders"])
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(upload.router, prefix="/api/upload", tags=["upload"])
+app.include_router(survey.router, prefix="/api/survey", tags=["survey"])
+
 
 @app.get("/")
 def read_root():
