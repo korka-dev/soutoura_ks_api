@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = FastAPI(title="SOUTOURA_KS API", version="1.0.0")
+app = FastAPI(title="KAAY-BAAY API", version="1.0.0")
 
 # CORS configuration
 app.add_middleware(
@@ -27,7 +27,7 @@ app.include_router(survey.router, prefix="/api/survey", tags=["survey"])
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to SOUTOURA_KS API"}
+    return {"message": "Welcome to KAAY-MBAAY API"}
 
 @app.get("/health")
 def health_check():

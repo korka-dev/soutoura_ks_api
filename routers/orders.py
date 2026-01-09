@@ -90,30 +90,30 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
           <style>
             body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }}
             .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-            .header {{ background: linear-gradient(135deg, #C08831 0%, #995A46 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }}
-            .logo {{ width: 80px; height: 80px; margin: 0 auto 15px; }}
+            .header {{ background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }}
+            .logo {{ width: 120px; height: 120px; margin: 0 auto 15px; background: white; border-radius: 50%; padding: 10px; }}
             .content {{ background: white; padding: 30px; border: 1px solid #e0e0e0; }}
-            .order-number {{ font-size: 24px; font-weight: bold; color: #C08831; margin-bottom: 20px; }}
+            .order-number {{ font-size: 24px; font-weight: bold; color: #16a34a; margin-bottom: 20px; }}
             .section {{ margin-bottom: 25px; }}
-            .section-title {{ font-size: 18px; font-weight: bold; color: #301B18; margin-bottom: 10px; border-bottom: 2px solid #C08831; padding-bottom: 5px; }}
+            .section-title {{ font-size: 18px; font-weight: bold; color: #15803d; margin-bottom: 10px; border-bottom: 2px solid #22c55e; padding-bottom: 5px; }}
             .info-row {{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }}
-            .info-label {{ font-weight: 600; color: #995A46; }}
-            .info-value {{ color: #301B18; }}
+            .info-label {{ font-weight: 600; color: #16a34a; }}
+            .info-value {{ color: #1f2937; }}
             table {{ width: 100%; border-collapse: collapse; margin-top: 15px; }}
-            th {{ background-color: #C08831; color: white; padding: 12px; text-align: left; }}
+            th {{ background-color: #16a34a; color: white; padding: 12px; text-align: left; }}
             td {{ padding: 12px; border-bottom: 1px solid #e0e0e0; }}
             tr:hover {{ background-color: #f9f9f9; }}
-            .total-row {{ background-color: #FFF8E7; font-weight: bold; font-size: 18px; }}
-            .total-row td {{ color: #C08831; padding: 15px 12px; }}
-            .footer {{ background-color: #301B18; color: white; padding: 20px; text-align: center; border-radius: 0 0 10px 10px; margin-top: 20px; }}
-            .badge {{ display: inline-block; padding: 5px 15px; background-color: #4CAF50; color: white; border-radius: 20px; font-size: 12px; font-weight: bold; }}
+            .total-row {{ background-color: #dcfce7; font-weight: bold; font-size: 18px; }}
+            .total-row td {{ color: #15803d; padding: 15px 12px; }}
+            .footer {{ background-color: #15803d; color: white; padding: 20px; text-align: center; border-radius: 0 0 10px 10px; margin-top: 20px; }}
+            .badge {{ display: inline-block; padding: 5px 15px; background-color: #22c55e; color: white; border-radius: 20px; font-size: 12px; font-weight: bold; }}
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/soutoura_logo-NWZB10FOtFdaOiZUZdvV0TEZqtpf70.png" alt="SOUTOURA_KS Logo" class="logo">
-              <h1 style="margin: 0; font-size: 28px;">SOUTOURA_KS</h1>
+              <img src="/assets/logo.jpg" alt="KAAY-MBAAY Logo" class="logo">
+              <h1 style="margin: 0; font-size: 28px;">KAAY-MBAAY</h1>
               <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.9;">Nouvelle commande reçue</p>
             </div>
             
@@ -172,16 +172,16 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
                 <p style="margin: 10px 0; color: #666;">{datetime.now().strftime("%d/%m/%Y à %H:%M")}</p>
               </div>
               
-              <div style="background-color: #FFF8E7; padding: 15px; border-left: 4px solid #C08831; margin-top: 20px;">
-                <p style="margin: 0; color: #995A46;">
+              <div style="background-color: #dcfce7; padding: 15px; border-left: 4px solid #16a34a; margin-top: 20px;">
+                <p style="margin: 0; color: #15803d;">
                   <strong>Action requise:</strong> Connectez-vous à votre dashboard pour valider cette commande et mettre à jour son statut.
                 </p>
               </div>
             </div>
             
             <div class="footer">
-              <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">SOUTOURA_KS</p>
-              <p style="margin: 0; font-size: 12px; opacity: 0.8;">Mode Africaine de Luxe</p>
+              <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">KAAY-MBAAY</p>
+              <p style="margin: 0; font-size: 12px; opacity: 0.8;">Agriculture Durable et Croissance</p>
               <p style="margin: 10px 0 0 0; font-size: 11px; opacity: 0.7;">
                 Cet email a été envoyé automatiquement. Ne pas répondre.
               </p>
@@ -199,9 +199,9 @@ async def create_order(order_data: OrderCreate, db: Session = Depends(get_db)):
                     "api-key": BREVO_API_KEY
                 },
                 json={
-                    "sender": {"email": "diallo30amadoukorka@gmail.com", "name": "SOUTOURA_KS"},
-                    "to": [{"email": OWNER_EMAIL, "name": "Propriétaire SOUTOURA_KS"}],
-                    "subject": f"🛍️ Nouvelle commande #{db_order.id} - SOUTOURA_KS",
+                    "sender": {"email": "diallo30amadoukorka@gmail.com", "name": "KAAY-MBAAY"},
+                    "to": [{"email": OWNER_EMAIL, "name": "Propriétaire KAAY-MBAAY"}],
+                    "subject": f"🛍️ Nouvelle commande #{db_order.id} - KAAY-MBAAY",
                     "htmlContent": email_content
                 }
             )
